@@ -1,38 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smart_ielts_coach_app/auth/providers/auth_provider.dart';
+import 'package:smart_ielts_coach_app/auth/screens/login_screen.dart';
+import 'package:smart_ielts_coach_app/home/home_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Check if the user is already logged in
+  final prefs = await SharedPreferences.getInstance();
+  final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+
+  runApp(MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => AuthProvider())],
+      child: MyApp(
+        isLoggedIn: isLoggedIn,
+      )));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isLoggedIn;
+  const MyApp({Key? key, required this.isLoggedIn}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     bool darkModeEnabled = false;
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: darkModeEnabled ? darkTheme : lightTheme,
-      darkTheme: darkTheme,
-      home: const MyHomePage(),
-    );
+    return Consumer<AuthProvider>(
+        builder: (context, authProvider, _) => MaterialApp(
+              title: 'Flutter Demo',
+              debugShowCheckedModeBanner: false,
+              theme: darkModeEnabled ? darkTheme : lightTheme,
+              darkTheme: darkTheme,
+              home: isLoggedIn
+                  ? const HomeScreen()
+                  : const LoginScreen(),
+            ));
   }
 }
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Testing color and font"),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-      ),
-    );
-  }
-}
-
 
 // Light Theme
 final ThemeData lightTheme = ThemeData(
@@ -74,4 +79,3 @@ final ThemeData darkTheme = ThemeData(
     shadow: Color(0xff757575),
   ),
 );
-
