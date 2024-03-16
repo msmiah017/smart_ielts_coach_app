@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_ielts_coach_app/auth/providers/auth_provider.dart';
 import 'package:smart_ielts_coach_app/auth/screens/login_screen.dart';
-import 'package:smart_ielts_coach_app/home/home_screen.dart';
+import 'package:smart_ielts_coach_app/home/providers/home_provider.dart';
+
+import 'home/screens/home_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +15,10 @@ Future<void> main() async {
   final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
 
   runApp(MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => AuthProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => HomeProvider())
+      ],
       child: MyApp(
         isLoggedIn: isLoggedIn,
       )));
@@ -32,10 +37,16 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: darkModeEnabled ? darkTheme : lightTheme,
               darkTheme: darkTheme,
+              //After finishing home page, replace
+              // home: here with the code below
               home: isLoggedIn
                   ? const HomeScreen()
                   : const LoginScreen(),
+              // home: const HomeScreen(),
             ));
+    // home: isLoggedIn
+    //     ? const HomeScreen()
+    //     : const LoginScreen(),
   }
 }
 
