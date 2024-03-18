@@ -90,8 +90,6 @@ class AuthProvider extends ChangeNotifier {
   AuthService authService = AuthService();
   Future<void> registerNewUser(User newUser) async {
     final requestMessage = await authService.register(newUser);
-
-    print("--------------------------$requestMessage");
     if (requestMessage == "success") {
       setUserAddedState(true);
       setRegistrationMessage("Successfully registered.");

@@ -166,7 +166,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 CustomSubmitButton(
                     context: context,
                     buttonText: 'Register',
-                    onPressed: () {
+                    onPressed: () async {
                       if (registerAccountNameController.text.isEmpty) {
                         authProvider.setNullAccountName(true);
                       } else {
@@ -200,18 +200,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   registerConfirmPasswordController.text);
 
                               authProvider.setRegistrationIsLoading(true);
-                              authProvider.registerNewUser(newUser).then(
-                                  (value) => authProvider
-                                      .setRegistrationIsLoading(false));
-
-                              if (authProvider.userAdded) {
+                              await authProvider.registerNewUser(newUser);
+                              authProvider.setRegistrationIsLoading(false);
+                              if (mounted && authProvider.userAdded) {
                                 Fluttertoast.showToast(
                                     msg: "Successfully Registered.",
                                     toastLength: Toast.LENGTH_LONG,
                                     backgroundColor:
-                                        lightTheme.colorScheme.secondary,
-                                    textColor:
-                                        lightTheme.colorScheme.onSecondary);
+                                        Theme.of(context).colorScheme.secondary,
+                                    textColor: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary);
                                 authProvider.setUserAddedState(true);
                                 Navigator.push(
                                     context,

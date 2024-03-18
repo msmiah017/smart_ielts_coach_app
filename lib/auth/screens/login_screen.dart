@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:smart_ielts_coach_app/auth/models/user.dart';
 import 'package:smart_ielts_coach_app/auth/providers/auth_provider.dart';
 import 'package:smart_ielts_coach_app/auth/screens/registration_screen.dart';
-import 'package:smart_ielts_coach_app/home/home_screen.dart';
+import 'package:smart_ielts_coach_app/home/screens/home_screen.dart';
 import 'package:smart_ielts_coach_app/utils/custom_form_fields.dart';
 import 'package:smart_ielts_coach_app/utils/global_utils.dart';
 
@@ -120,7 +120,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
                               await authProvider.loginUser(user);
 
-                              if (mounted && authProvider.loggedIn) {
+                              //_loginEmailController.text.contains("test@")
+                              // This line is just for testing convenience
+                              if (_loginEmailController.text.contains("test@") || (mounted && authProvider.loggedIn)) {
                                 authProvider.setIsLoading(false);
                                 Navigator.pushReplacement(
                                     currentContext,
