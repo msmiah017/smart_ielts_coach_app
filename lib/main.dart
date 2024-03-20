@@ -39,10 +39,10 @@ class MyApp extends StatelessWidget {
               darkTheme: darkTheme,
               //After finishing home page, replace
               // home: here with the code below
-              home: isLoggedIn
-                  ? const HomeScreen()
-                  : const LoginScreen(),
-              // home: const HomeScreen(),
+              // home: isLoggedIn
+              //     ? const HomeScreen()
+              //     : const LoginScreen(),
+              home: const HomeScreen(),
             ));
     // home: isLoggedIn
     //     ? const HomeScreen()
