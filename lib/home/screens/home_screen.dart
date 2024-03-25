@@ -28,6 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        shadowColor: Theme.of(context).colorScheme.secondary,
+        surfaceTintColor: Colors.transparent,
+        elevation: 1,
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Builder(builder: (context) {
@@ -44,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         title: Container(
           width: double.infinity,
-          height: 40,
+          height: 38,
           padding: const EdgeInsets.only(left: 15, right: 20),
           decoration: BoxDecoration(
               border:
@@ -53,25 +57,31 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Flexible(
+              Flexible(
                   flex: 8,
                   child: TextField(
                     decoration: InputDecoration(
                       enabledBorder:
-                          OutlineInputBorder(borderSide: BorderSide.none),
+                          const OutlineInputBorder(borderSide: BorderSide.none),
                       focusedBorder: InputBorder.none,
                       hintText: "Search...",
+                      hintStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.onBackground,
+                        fontSize: 14
+                      ),
                       contentPadding: EdgeInsets.zero,
                     ),
                   )),
               Flexible(
-                  child: IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-                onPressed: () {},
-              ))
+                  child: Center(
+                    child: IconButton(
+                                    icon: Icon(
+                    Icons.search,
+                    color: Theme.of(context).colorScheme.secondary,
+                                    ),
+                                    onPressed: () {},
+                                  ),
+                  ))
             ],
           ),
         ),
@@ -86,9 +96,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     backgroundColor: Theme.of(context).colorScheme.secondary,
                     textColor: Theme.of(context).colorScheme.onSecondary);
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.message,
                 size: 24,
+                color: Theme.of(context).colorScheme.onBackground,
               ))
         ],
       ),
@@ -105,39 +116,46 @@ class _HomeScreenState extends State<HomeScreen> {
           Dashboard()
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, size: 28),
-            label: 'Test Centre',
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 0.4), // Adjust color and width as needed
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_activity_outlined, size: 28),
-            label: 'Activity',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications, size: 28),
-            label: 'Notifications',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard, size: 28),
-            label: 'Dashboard',
-          ),
-        ],
-        currentIndex: homeProvider.currentNavItemIndex,
-        selectedFontSize: 12,
-        selectedItemColor: Theme.of(context).colorScheme.primary,
-        selectedLabelStyle:
-            TextStyle(color: Theme.of(context).colorScheme.primary),
-        unselectedItemColor: Theme.of(context).colorScheme.secondary,
-        unselectedLabelStyle:
-            TextStyle(color: Theme.of(context).colorScheme.secondary),
-        showUnselectedLabels: true,
-        onTap: (index) {
-          homeProvider.setCurrentNavItemIndex(index);
-          _pageController.animateToPage(index,
-              duration: const Duration(milliseconds: 300), curve: Curves.ease);
-        },
+        ),
+        child: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home, size: 28),
+              label: 'Test Centre',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.local_activity_outlined, size: 28),
+              label: 'Activity',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.notifications, size: 28),
+              label: 'Notifications',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.dashboard, size: 28),
+              label: 'Dashboard',
+            ),
+          ],
+          currentIndex: homeProvider.currentNavItemIndex,
+          selectedFontSize: 12,
+          selectedItemColor: Theme.of(context).colorScheme.primary,
+          selectedLabelStyle:
+              TextStyle(color: Theme.of(context).colorScheme.primary),
+          unselectedItemColor: Theme.of(context).colorScheme.secondary,
+          unselectedLabelStyle:
+              TextStyle(color: Theme.of(context).colorScheme.secondary),
+          showUnselectedLabels: true,
+          onTap: (index) {
+            homeProvider.setCurrentNavItemIndex(index);
+            _pageController.animateToPage(index,
+                duration: const Duration(milliseconds: 300), curve: Curves.ease);
+          },
+        ),
       ),
       drawer: Container(
         height: height,

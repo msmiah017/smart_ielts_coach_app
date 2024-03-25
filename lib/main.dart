@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_ielts_coach_app/auth/providers/auth_provider.dart';
 import 'package:smart_ielts_coach_app/auth/screens/login_screen.dart';
 import 'package:smart_ielts_coach_app/home/providers/home_provider.dart';
+import 'package:smart_ielts_coach_app/test_centre/writing/providers/writing_provider.dart';
 
 import 'home/screens/home_screen.dart';
 
@@ -17,7 +18,9 @@ Future<void> main() async {
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
-        ChangeNotifierProvider(create: (_) => HomeProvider())
+        ChangeNotifierProvider(create: (_) => HomeProvider()),
+        ChangeNotifierProvider(create: (_) => WritingProvider()),
+
       ],
       child: MyApp(
         isLoggedIn: isLoggedIn,
