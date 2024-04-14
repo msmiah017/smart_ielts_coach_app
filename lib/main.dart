@@ -5,7 +5,8 @@ import 'package:smart_ielts_coach_app/auth/providers/auth_provider.dart';
 import 'package:smart_ielts_coach_app/auth/screens/login_screen.dart';
 import 'package:smart_ielts_coach_app/home/providers/home_provider.dart';
 import 'package:smart_ielts_coach_app/test_centre/writing/providers/writing_provider.dart';
-
+import 'package:smart_ielts_coach_app/tester_hub/providers/tester_provider.dart';
+import 'package:smart_ielts_coach_app/tester_hub/screens/tester_screen.dart';
 import 'home/screens/home_screen.dart';
 
 Future<void> main() async {
@@ -20,7 +21,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => HomeProvider()),
         ChangeNotifierProvider(create: (_) => WritingProvider()),
-
+        ChangeNotifierProvider(create: (_) => TesterProvider()),
       ],
       child: MyApp(
         isLoggedIn: isLoggedIn,
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
               //     ? const HomeScreen()
               //     : const LoginScreen(),
               home: const HomeScreen(),
+          // home: const TesterScreen(),
             ));
     // home: isLoggedIn
     //     ? const HomeScreen()

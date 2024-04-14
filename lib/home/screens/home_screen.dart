@@ -8,6 +8,9 @@ import 'package:smart_ielts_coach_app/home/screens/activity.dart';
 import 'package:smart_ielts_coach_app/home/screens/dashboard.dart';
 import 'package:smart_ielts_coach_app/home/screens/notifications.dart';
 import 'package:smart_ielts_coach_app/home/screens/test_centre.dart';
+import 'package:smart_ielts_coach_app/sidebar/screens/profile.dart';
+import 'package:smart_ielts_coach_app/sidebar/screens/saved_tests.dart';
+import 'package:smart_ielts_coach_app/sidebar/screens/settings.dart';
 import 'package:smart_ielts_coach_app/utils/custom_form_fields.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -66,22 +69,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       focusedBorder: InputBorder.none,
                       hintText: "Search...",
                       hintStyle: TextStyle(
-                        color: Theme.of(context).colorScheme.onBackground,
-                        fontSize: 14
-                      ),
+                          color: Theme.of(context).colorScheme.onBackground,
+                          fontSize: 14),
                       contentPadding: EdgeInsets.zero,
                     ),
                   )),
               Flexible(
                   child: Center(
-                    child: IconButton(
-                                    icon: Icon(
+                child: IconButton(
+                  icon: Icon(
                     Icons.search,
                     color: Theme.of(context).colorScheme.secondary,
-                                    ),
-                                    onPressed: () {},
-                                  ),
-                  ))
+                  ),
+                  onPressed: () {},
+                ),
+              ))
             ],
           ),
         ),
@@ -119,7 +121,9 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           border: Border(
-            top: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 0.4), // Adjust color and width as needed
+            top: BorderSide(
+                color: Theme.of(context).colorScheme.secondary,
+                width: 0.4), // Adjust color and width as needed
           ),
         ),
         child: BottomNavigationBar(
@@ -153,7 +157,8 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: (index) {
             homeProvider.setCurrentNavItemIndex(index);
             _pageController.animateToPage(index,
-                duration: const Duration(milliseconds: 300), curve: Curves.ease);
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.ease);
           },
         ),
       ),
@@ -220,7 +225,45 @@ class _HomeScreenState extends State<HomeScreen> {
                         Icons.help_outline_outlined
                       ];
                       return ListTile(
-                        leading: Icon(navItemIcons[index]),
+                        onTap: () {
+                          switch (index) {
+                            case 0:
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const UserProfile(),
+                                ),
+                              );
+                              break;
+                            case 1:
+                              // Code for index 1
+                              break;
+                            case 2:
+                              // Code for index 2
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const SavedTests(),
+                                ),
+                              );
+                              break;
+                            case 4:
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Settings(),
+                                ),
+                              );
+                              break;
+                            default:
+                              // Code for other indices
+                              break;
+                          }
+                        },
+                        leading: Icon(
+                          navItemIcons[index],
+                          color: Theme.of(context).colorScheme.onBackground,
+                        ),
                         title: Text(
                           navItemsLabels[index],
                           style: TextStyle(
@@ -228,7 +271,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Theme.of(context).colorScheme.onBackground),
                         ),
                         contentPadding: EdgeInsets.zero,
-                        onTap: () {},
                       );
                     }),
               ),
@@ -246,9 +288,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
+                      Text(
                         "Dark Mode",
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Theme.of(context).colorScheme.onBackground),
                       ),
                       Switch(
                         value: homeProvider.darkModeEnabled,

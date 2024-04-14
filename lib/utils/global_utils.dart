@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 
 
 //All text styles
-TextStyle bodyTextSmall(){
-  return const TextStyle(
+TextStyle bodyTextSmall(BuildContext context, Color color){
+  return TextStyle(
     fontSize: 14,
+      color: color
   );
 }
-TextStyle bodyTextMedium(BuildContext context){
+TextStyle bodyTextMedium(BuildContext context, Color color){
   return TextStyle(
       fontSize: 16,
-      color: Theme.of(context).colorScheme.onBackground
+      color: color
   );
 }
-TextStyle bodyTextLarge(){
-  return const TextStyle(
-    fontSize: 24,
+TextStyle bodyTextLarge(BuildContext context, Color color){
+  return TextStyle(
+    fontSize: 24, color: color
   );
 }
 

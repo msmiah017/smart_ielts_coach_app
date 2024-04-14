@@ -153,14 +153,14 @@ class _WritingModuleState extends State<WritingModule> {
                             // The extra quotes here are for the text itself.
                             Text(
                                 " \" ${writingProvider.writingQuestions[index]["questionStatement"]} \" ",
-                                style: bodyTextMedium(context)),
+                                style: bodyTextMedium(context, Theme.of(context).colorScheme.onBackground)),
                             const SizedBox(
                               height: 15,
                             ),
                             Text(
                                 writingProvider.writingQuestions[index]
                                     ["questionText"],
-                                style: bodyTextMedium(context), softWrap: true,),
+                                style: bodyTextMedium(context, Theme.of(context).colorScheme.onBackground), softWrap: true,),
                           ],
                         ),
                       ),

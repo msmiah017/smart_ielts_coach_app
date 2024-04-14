@@ -105,18 +105,18 @@ class _ReadingModuleState extends State<ReadingModule> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text("Passage 1 : Crop growing sky scrappers.",
-                            style: bodyTextMedium(context)),
+                            style: bodyTextMedium(context, Theme.of(context).colorScheme.onBackground)),
                         const SizedBox(
                           height: 5,
                         ),
                         Text("Passage 2 : The Falkirk Wheel.",
-                            style: bodyTextMedium(context)),
+                            style: bodyTextMedium(context, Theme.of(context).colorScheme.onBackground)),
                         const SizedBox(
                           height: 5,
                         ),
                         Text(
                             "Passage 3 : Reducing the effect of climate change.",
-                            style: bodyTextMedium(context)),
+                            style: bodyTextMedium(context, Theme.of(context).colorScheme.onBackground)),
                       ],
                     )),
                 Flexible(

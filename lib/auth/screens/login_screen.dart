@@ -137,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 10,
                     ),
                     Text('Have\'nt got any account?',
-                        style: bodyTextMedium(context)),
+                        style: bodyTextMedium(context, Theme.of(context).colorScheme.onBackground)),
                     CustomTextButton(
                         context: context,
                         buttonText: 'Register Now',
