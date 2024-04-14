@@ -174,11 +174,11 @@ class AuthProvider extends ChangeNotifier {
     } else if (loginStatus == "timeout") {
       setLoggedIn(false);
       setIsLoading(false);
-      setLoginErrorMessage("Something went wrong. Please try later.");
+      setLoginErrorMessage("Something went wrong. Please try later.1");
     } else {
       setLoggedIn(false);
       setIsLoading(false);
-      setLoginMessage("Something went wrong. Please try later.");
+      setLoginMessage("Something went wrong. Please try later.2");
     }
   }
 }

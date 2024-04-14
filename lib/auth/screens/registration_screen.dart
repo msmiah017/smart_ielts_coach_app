@@ -35,7 +35,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       appBar: AppBar(
         title: Text(
           'Registration',
-          style: bodyTextLarge(),
+          style: bodyTextLarge(context, Theme.of(context).colorScheme.onBackground),
         ),
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -227,7 +227,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
                 Text(
                   'Already registered?',
-                  style: bodyTextMedium(context),
+                  style: bodyTextMedium(context, Theme.of(context).colorScheme.onBackground),
                 ),
                 // textBtn(context, 'Login Instead')
                 CustomTextButton(
